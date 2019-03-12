@@ -1,0 +1,135 @@
+<!--从外部导入home.html-->
+{{extend '../_layouts/home.html'}}
+
+<!--开始修改title-->
+{{block 'title'}}{{'多人博客 - 账户信息'}}{{/block}}
+
+<!--开始修改body-->
+{{block 'body'}}
+<section class="container">
+	
+	<!--开始引用这个文件作为侧边栏-->
+  {{include '../_partials/settings-nav.html'}}
+  <div class="col-md-5">
+    <div class="subhead">
+      <h2>修改密码</h2>
+    </div>
+    <hr>
+    <div id="tip_frame" style="text-align:center;background:#A6D796;height:0;"><span id="tip_word"></span></div>
+    
+    <form id="admin_edit">
+      <div class="form-group">
+        <label for="exampleInputPassword1">当前密码</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder=""  name="oldPassword">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">新的密码</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" name="newPassword">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">确认密码</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" name="againPassword">
+      </div>
+      <button type="submit" class="btn btn-success">保存</button>
+    </form>
+    <div class="subhead">
+      <h2>注销账号</h2>
+      <hr>
+    </div>
+    <div>
+      <p>一旦注销，不可找回，请谨慎操作</p>
+      <form id="delete_frame">
+      		<input type="hidden" name="_id"  value="{{ user._id }}" /> 
+     		 	<button  type="submit" class="btn btn-danger" >删除</button>
+      </form>
+
+    </div>
+    <hr>
+  </div>
+</section>
+<script src="../../node_modules/jquery/dist/jquery.js"></script>
+<script>
+	
+	$('#admin_edit').on('submit',function(e){
+		e.preventDefault()
+		var formData = $(this).serialize()	
+		$.ajax({
+				url:'/settings/admin',
+				type:'post',
+				data:formData,
+				dataType:'json',
+				success:function(data){
+					/**
+					 *值得注意的是，倘若做前后端分离的时候，在这里完全可以接收后端传回来的数据
+					 *然后在这里进行数据分配，比如用vue框架，就可以接收到数据并且进行分配
+					 *
+					 */
+										
+					var err_code = data.err_code
+					var message = data.message
+					if (err_code === 0) {
+
+						window.alert('修改成功')
+						
+            window.location.href = '/settings/profile'
+          } 
+          else if(err_code === 200){
+          	$('#tip_frame').animate({
+          		"height":"50px"
+          	},500).animate({
+          		"height":"50px"
+          	},1000)
+          	$('#tip_word').text(message)
+          }
+          else if(err_code === 201){
+          	$('#tip_frame').animate({
+          		"height":"50px"
+          	},500).animate({
+          		"height":"50px"
+          	},1000)
+          	$('#tip_word').text(message)
+          }
+     			
+     			else if(err_code === 202){
+          	$('#tip_frame').animate({
+          		"height":"50px"
+          	},500).animate({
+          		"height":"50px"
+          	},1000)
+          	$('#tip_word').text(message)
+          }
+          else if (err_code === 500) {
+            window.alert('服务器忙，请稍后重试！')
+          }
+				}
+		})
+		
+	})
+	
+	$('#delete_frame').on('submit',function(e){
+		e.preventDefault()
+		var formData = $(this).serialize()	
+		//formData就是传输的数据
+//		_id=5c66474bbddd0006b42e3a68&email=555%405.com
+		$.ajax({
+			url:"/settings/delete",
+			type:"post",
+			data:formData,
+			dataType:'json',
+			success:function(data){
+				var err_code = data.err_code
+				if (err_code === 0) {
+						
+						window.alert('删除用户成功！')
+            window.location.href = '/login'
+        }
+				else if (err_code === 500) {
+            window.alert('服务器忙，请稍后重试！')
+        }
+			}
+		});
+	})
+	
+
+</script>
+{{/block}}

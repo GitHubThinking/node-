@@ -1,0 +1,89 @@
+{{extend '../_layouts/home.html'}}
+
+{{block 'title'}}{{'多人博客 - 个人信息'}}{{/block}}
+
+{{block 'body'}}
+<section class="container">
+
+ 
+  
+  <!-- About -->
+  <div class="about" id="about">
+  	<div class="container">
+  		<h3 class="heading">About Me</h3>
+  		<div class="col-md-6 aboutleft">
+  			<img src="{{ user.avatar }}" style="width:100px;height:100px;" class="img-thumbnail"/>
+  		</div>
+  		<div class="col-md-6 aboutright">
+  			<div class="clients">
+  				<section class="slider">
+  					<div class="flexslider">
+  						<ul class="slides">
+  							<li>
+  								<h3>Personal information</h3>
+  								<ul class="address">
+  									<li>
+  										<ul class="agileits-address-text ">
+  											<li><b>Email</b></li>
+  											<li>{{ user.email }}</li>
+  										</ul>
+  									</li>
+  									<li>
+  										<ul class="agileits-address-text">
+  											<li><b>Name</b></li>
+  											<li>{{ user.nickname }}</li>
+  										</ul>
+  									</li>
+  									<li>
+  										<ul class="agileits-address-text">
+  											<li><b>Created Time</b></li>
+  											<li>{{ user.created_time }}</li>
+  										</ul>
+  									</li>
+  									<li>
+  										<ul class="agileits-address-text">
+  											<li><b>Birthday </b></li>
+  											<li>{{ user.birthday }}</li>
+  										</ul>
+  									</li>
+  									<li>
+  										<ul class="agileits-address-text">
+  											<li><b>Bio</b></li>
+  											<li>{{ user.birthday }}</li>
+  										</ul>
+  									</li>
+  									
+  								</ul>
+  								<div class="clearfix"></div>
+  								<ul class="hireme">
+  									<li>
+  										<button  class="btn btn-danger">禁言</button>
+  									</li>
+  									<li>
+  										<button  class="btn btn-success">封号</button>
+  									</li>
+  								</ul>
+  							</li>
+  							<li>
+  								<h3>Hi, Iam Albert son</h3>
+  								<h4>UI/UX designer - +4 years of coding experience</h4>
+  								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .</p>
+  								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  							</li>
+  						</ul>
+  					</div>
+  				</section>
+  			</div>
+  			<div class="clearfix"> </div>
+  		</div>
+  		<div class="clearfix"></div>
+  	</div>
+  </div>
+  <!-- About -->
+  
+</section>
+<script src="../../node_modules/jquery/dist/jquery.js"></script>
+<script>
+
+</script>
+{{/block}}
